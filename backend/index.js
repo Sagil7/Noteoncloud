@@ -4,7 +4,7 @@ var cors = require('cors')
 
 
 app.use(cors())
-const port = process.env.PORT || 5000
+const port =  5000
 
 const mongoose = require('mongoose');
 const uri='mongodb://localhost:27017/';
