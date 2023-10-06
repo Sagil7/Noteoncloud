@@ -1,6 +1,8 @@
 # Getting Started with Create React App
 # First of all instal node package in Assignment as well as Assignment/backend
  npm init 
+# You may need to add core so add cors in Assignment/backend
+npm i cors
 
 # GO to Assignment/backend 
 run node index.js
