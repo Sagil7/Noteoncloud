@@ -35,15 +35,7 @@ const Notestate=(props)=>{
       body: JSON.stringify({title,description,tag}), 
     });
     const note=await response.json();
-    // const note= {
-    //   "_id": "6f170faab28e242edf5130",
-    //   "user": "650f16abaab28e242edf512d",
-    //   "title": title,
-    //   "description": description,
-    //   "tag": "add",
-    //   "__v": 0
-    // }
-    // Todo API call
+
    setnotes(notes.concat(note))
   }
 

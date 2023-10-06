@@ -15,12 +15,12 @@ router.post('/createuser', [
   body('name').isLength({ min: 3 }),
   body('password').isLength({ min: 5 }),
 ], async (req, res) => {
-  let sucsess= false;
+  let sucsess = false;
 
   // checkig is there any error return by express validator if it exist then return the error array
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ sucsess,errors: errors.array() });
+    return res.status(400).json({ sucsess, errors: errors.array() });
   }
 
   // Wrapping the content in try catch block inorder to deal with unknown error
@@ -29,10 +29,10 @@ router.post('/createuser', [
     // checking if the email already registered
     let user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res.status(400).json({sucsess, errors: "email already exist" });
+      return res.status(400).json({ sucsess, errors: "email already exist" });
     }
     // adding some salt to password become more secure by adding some more string to it  using bcryptjs
-    const salt =  await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(10);
     // converting plain text into a hash value
     const secpass = await bcrypt.hash(req.body.password, salt);
 
@@ -48,10 +48,10 @@ router.post('/createuser', [
       }
     }
     // signing the authtoken
-    sucsess=true;
+    sucsess = true;
     const authtoken = jwt.sign(data, secretkey);
     // sendint the authtoken itself as the response
-    res.send({sucsess, authtoken })
+    res.send({ sucsess, authtoken })
 
   }
   catch (error) {
@@ -68,37 +68,38 @@ router.post('/login', [
 
 ], async (req, res) => {
   // express validation check 
-  let sucsess=false;
+  let sucsess = false;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
   try {
 
-
+    // Deconstructing the email and password value from req body 
     const { email, password } = req.body;
     let user = await User.findOne({ email });
     // if user doesnot exit return email not found
     if (!user) {
-      return res.status(400).json({ success,error: "email not found" });
+      return res.status(400).json({ success, error: "email not found" });
     }
-  
 
-    const hash=user.password;
+
+    const hash = user.password;
     // comparing the password saved in the database with the pasword enter by user
-    const passwordcompare =  await bcrypt.compare(password, hash);
+    const passwordcompare = await bcrypt.compare(password, hash);
     console.log(passwordcompare)
     if (!passwordcompare) {
       return res.status(400).json({ error: "enter correct credential" });
     }
+    // This is the data which will be used in auth token take Id so that uniqueness of auth token acheived
     const data = {
       user: {
         id: user.id
       }
     }
     const authtoken = jwt.sign(data, secretkey);
-    sucsess=true;
-    res.send({sucsess,authtoken })
+    sucsess = true;
+    res.send({ sucsess, authtoken })
 
   } catch (error) {
     console.error(error.message);
@@ -108,10 +109,11 @@ router.post('/login', [
 });
 
 //ROUTE 3 get user detail login required
-router.post('/getuser',fetchuser, async (req, res) => {
+router.post('/getuser', fetchuser, async (req, res) => {
 
   try {
-   const userid=req.user.id;
+    const userid = req.user.id;
+    // Geting user detail using id and return all the value in user except password 
     let user = await User.findById(userid).select("-password");
     res.send(user);
 

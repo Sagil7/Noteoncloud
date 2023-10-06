@@ -7,8 +7,8 @@ function Adddnote() {
   const [note, setnotes] = useState({ title: "", description: "", tag: "" })
   const handleonclick = (e) => {
     e.preventDefault();
-    addnote(note.title,note.description,note.tag);
-   
+    addnote(note.title, note.description, note.tag);
+
   }
   const onchange = (e) => {
     setnotes({ ...note, [e.target.name]: e.target.value })
@@ -29,7 +29,7 @@ function Adddnote() {
           <label htmlFor="tag">Tag</label>
           <input type="text" className="form-control" id="tag" name='tag' placeholder="Tag" onChange={onchange} />
         </div>
-      
+
         <button type="submit" className="btn btn-primary" onClick={handleonclick}>AddNote</button>
       </form>
       <h2>your notes</h2>

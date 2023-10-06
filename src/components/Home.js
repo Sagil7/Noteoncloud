@@ -6,7 +6,6 @@ function Home() {
   return (
    
     <div>
-     
       <Notes/>
     </div>
   )

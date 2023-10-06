@@ -17,8 +17,8 @@ router.get('/fetchalluser', fetchuser, async (req, res) => {
   }
 
 })
-//ROUTE 2. adding notes to the user
 
+//ROUTE 2. adding notes to the user
 router.post('/addnote', [
   // applying validiation using express validator on body values
   body('title').isLength({ min: 3 }),
@@ -47,51 +47,47 @@ router.post('/addnote', [
 //ROUTE 3. updating an existing notes to the user
 router.put('/updatenote/:id', fetchuser, async (req, res) => {
   try {
-    
- 
-  const { title, description, tag } = req.body;
-  const newnote = {};
-  if (title) { newnote.title =title};
-  if (description) { newnote.description=description };
-  if (tag) { newnote.tag=tag };
-  // find the note to be update
-  let note = await Note.findById(req.params.id);
-  if (!note) { 
-    return res.status(404).send("not found") 
-  };
-  if (note.user.toString() !== req.user.id) {
-    return res.status(401).send("Not allowed")
+    const { title, description, tag } = req.body;
+    const newnote = {};
+    if (title) { newnote.title = title };
+    if (description) { newnote.description = description };
+    if (tag) { newnote.tag = tag };
+    // find the note to be update
+    let note = await Note.findById(req.params.id);
+    if (!note) {
+      return res.status(404).send("not found")
+    };
+    if (note.user.toString() !== req.user.id) {
+      return res.status(401).send("Not allowed")
+    }
+    note = await Note.findByIdAndUpdate(req.params.id, { $set: newnote }, { new: true });
+    res.json({ note });
+    console.log(note);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ error: "some error occured" });
   }
-  note =await Note.findByIdAndUpdate(req.params.id,{$set:newnote},{new:true});
-  res.json({note});
-  console.log(note);
-} catch (error) {
-  console.error(error.message);
-  res.status(500).send({ error: "some error occured" });
-}
-  
+
 })
 
 //ROUTE 4. deleting an existing notes to the user
 router.delete('/delete/:id', fetchuser, async (req, res) => {
 
   try {
-    
-  
-  // find the note to be update
-  let note = await Note.findById(req.params.id);
-  if (!note) { 
-    return res.status(404).send("not found") 
-  };
-  if (note.user.toString() !== req.user.id) {
-    return res.status(401).send("Not allowed")
+    // find the note to be update
+    let note = await Note.findById(req.params.id);
+    if (!note) {
+      return res.status(404).send("not found")
+    };
+    if (note.user.toString() !== req.user.id) {
+      return res.status(401).send("Not allowed")
+    }
+    note = await Note.findByIdAndDelete(req.params.id);
+    res.json({ "Succese": "note has been deleted", note: note });
+    console.log(note);
+  } catch (error) {
+
   }
-  note =await Note.findByIdAndDelete(req.params.id);
-  res.json({"Succese":"note has been deleted",note:note});
-  console.log(note);
-} catch (error) {
-    
-}
 })
 
 

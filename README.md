@@ -1,4 +1,14 @@
 # Getting Started with Create React App
+# First of all instal node package in Assignment as well as Assignment/backend
+ npm init 
+
+# GO to Assignment/backend 
+run node index.js
+# GO to Assignment
+run npm run start
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
