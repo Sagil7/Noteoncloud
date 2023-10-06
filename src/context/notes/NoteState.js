@@ -3,7 +3,7 @@ import Notecontext from "./notecontext";
 
 const Notestate=(props)=>{
   const [notes,setnotes]=useState([])
-  const host="http://localhost:5000"
+  const host="https://assignment-6q57.onrender.com"
 
 
   const getNotes=async ()=>{

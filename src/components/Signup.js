@@ -9,7 +9,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     const { name, email, password } = credential;
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+    const response = await fetch("https://assignment-6q57.onrender.com/api/auth/createuser", {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
