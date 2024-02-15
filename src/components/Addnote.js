@@ -30,7 +30,7 @@ function Adddnote() {
           <input type="text" className="form-control" id="tag" name='tag' placeholder="Tag" onChange={onchange} />
         </div>
 
-        <button type="submit" className="btn btn-primary" onClick={handleonclick}>AddNote</button>
+        <button type="submit" className="btn btn-success my-2" onClick={handleonclick}>AddNote</button>
       </form>
       <h2>your notes</h2>
 
