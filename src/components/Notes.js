@@ -36,6 +36,9 @@ function Notes() {
   }
   return (
     <>
+    <div>
+
+    
       <Adddnote />
       <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Launch demo modal
@@ -77,6 +80,7 @@ function Notes() {
         {notes.map((note) => {
           return <Noteitem key={note._id} note={note} updateNote={updateNote} />
         })}
+      </div>
       </div>
     </>
   )

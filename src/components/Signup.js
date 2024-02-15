@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../Style/loginstyle.css'
 
 function Signup() {
 
@@ -31,26 +32,40 @@ function Signup() {
   }
 
   return (
-    <div>
-      <h2>Please Signup to use Inotebook</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label" >Name</label>
-          <input type="text" className="form-control" id="name" required minLength={3} onChange={onchange} name='name' value={credential.name} aria-describedby="emailHelp" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label" >Email address</label>
-          <input type="email" className="form-control" id="email" onChange={onchange} name='email' value={credential.email} aria-describedby="emailHelp" />
-          <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" onChange={onchange} name='password' value={credential.password} id="password" />
-        </div>
-
-
-        <button type="submit" className="btn btn-primary" >Submit</button>
-      </form>
+    <div className='maincontainer'>
+     
+      <div class="container1">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login" onSubmit={handleSubmit}>
+				<div class="login__field">
+          <i class="fa-solid fa-user" style={{color: '#B197FC'}}></i>
+          <input type="text" className="login__input" id="name" required minLength={3} onChange={onchange} name='name' value={credential.name} aria-describedby="emailHelp" placeholder='Enter your Name' />
+				</div>
+				<div class="login__field">
+					{/* <i class="login__icon fas fa-lock"></i> */}
+          <i class="fa-solid fa-envelope" style={{color: '#B197FC'}}></i>
+          <input type="email" className="login__input" id="email" onChange={onchange} name='email' value={credential.email} aria-describedby="emailHelp" placeholder='Email' />
+				</div>
+				<div class="login__field">
+          <i class="fa-solid fa-lock" style={{color: '#B197FC'}}></i>
+          <input type="password" className="login__input" onChange={onchange} name='password' value={credential.password} id="password"  placeholder='Password'/>
+				</div>
+				<button class="button login__submit" type='submit'>
+					<span class="button__text">Sign Up</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>				
+			</form>
+		
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
     </div>
   )
 
